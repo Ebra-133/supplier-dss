@@ -5,101 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Supplier Selection DSS</title>
 <style>
-:root{--bg:#f6f7f4;--sf:#fff;--tx:#1d2a26;--mu:#5d6b66;--ln:#d9dfdb;--ac:#0f6b5c;--c1:#0f6b5c;--c2:#d29a2a;--c3:#3e6fa8;--c4:#b5473a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a18;--sf:#1d2623;--tx:#e8eeeb;--mu:#98a8a1;--ln:#34413c;--ac:#4fc4ad;--c1:#4fc4ad;--c2:#e2b04a;--c3:#6f9fd6;--c4:#e0766a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#141a18;--sf:#1d2623;--tx:#e8eeeb;--mu:#98a8a1;--ln:#34413c;--ac:#4fc4ad;--c1:#4fc4ad;--c2:#e2b04a;--c3:#6f9fd6;--c4:#e0766a;color-scheme:dark}
+:root{--bg:#f3f5f9;--sf:#fff;--tx:#18212f;--mu:#6b7686;--ln:#e3e8ef;--ac:#1d4ed8;--acs:#e8efff;--g:#0f9d6b;--gs:#e5f6ef;--o:#d9822b;--os:#fdf0e0;--r:#d1453b;--rs:#fdeceb;--c1:#1d4ed8;--c2:#0f9d6b;--c3:#d9822b;--c4:#d1453b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e131b;--sf:#161d28;--tx:#e8edf5;--mu:#8e9bb0;--ln:#273142;--ac:#6c95ff;--acs:#1c2a4d;--g:#34c58f;--gs:#143428;--o:#eba14f;--os:#3a2a14;--r:#f0766c;--rs:#3d1c1a;--c1:#6c95ff;--c2:#34c58f;--c3:#eba14f;--c4:#f0766c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e131b;--sf:#161d28;--tx:#e8edf5;--mu:#8e9bb0;--ln:#273142;--ac:#6c95ff;--acs:#1c2a4d;--g:#34c58f;--gs:#143428;--o:#eba14f;--os:#3a2a14;--r:#f0766c;--rs:#3d1c1a;--c1:#6c95ff;--c2:#34c58f;--c3:#eba14f;--c4:#f0766c;color-scheme:dark}
 [hidden]{display:none!important}
-html,body{margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.5 Georgia,"Times New Roman",serif}
-main{max-width:1000px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:0 0 10px}
-.sub{color:var(--mu);margin:0 0 18px}
-section{background:var(--sf);border:1px solid var(--ln);border-radius:6px;padding:16px;margin-bottom:16px}
-.g{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}@media(max-width:640px){.g{grid-template-columns:1fr}}
-label{display:flex;justify-content:space-between;font-size:14px}input[type=range]{width:100%;accent-color:var(--ac)}
-.tabs button,.btn{font:inherit;border:1px solid var(--ln);background:var(--sf);color:var(--tx);padding:6px 12px;cursor:pointer;border-radius:4px}
-.tabs button[aria-pressed=true]{background:var(--ac);color:var(--bg);border-color:var(--ac)}
-.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.sc{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}
-th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--ln);white-space:nowrap}th{color:var(--mu);font-weight:normal}
-.bar{display:flex;height:14px;min-width:160px;background:var(--ln);border-radius:2px;overflow:hidden}.bar i{display:block}
-.note{color:var(--mu);font-size:13px}.ok{color:var(--c1)}.bad{color:var(--c4)}
-.k{display:inline-block;width:10px;height:10px;margin:0 4px 0 10px;border-radius:2px}
-button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+html,body{margin:0}body{background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.app{display:grid;grid-template-columns:210px 1fr;min-height:100vh}
+aside{background:var(--sf);border-right:1px solid var(--ln);padding:16px 12px;position:sticky;top:0;align-self:start;height:100vh;box-sizing:border-box}
+.brand{display:flex;gap:8px;align-items:center;font-weight:700;margin-bottom:18px}.logo{width:26px;height:26px;border-radius:7px;background:var(--ac);color:#fff;display:grid;place-items:center;font-size:13px}
+aside a{display:block;padding:8px 10px;border-radius:8px;color:var(--mu);text-decoration:none;margin-bottom:4px}
+aside a:hover{background:var(--bg)}aside a.on{background:var(--acs);color:var(--ac);font-weight:600}
+.side-note{margin-top:20px;font-size:12px;color:var(--mu);border-top:1px solid var(--ln);padding-top:12px}
+main{padding:18px 20px 40px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+h1{font-size:20px;margin:0}h2{font-size:14px;margin:0}
+.badge{font-size:12px;padding:4px 10px;border-radius:99px;background:var(--gs);color:var(--g);font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:14px;min-width:0}
+.kpi small{color:var(--mu);font-size:12px}.kpi b{display:block;font-size:22px;margin:4px 0 2px}.kpi span{font-size:12px;color:var(--mu)}
+.ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
+.tag{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--acs);color:var(--ac);white-space:nowrap}
+.grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.stack{display:grid;gap:12px;align-content:start}
+.pri{margin-bottom:14px}.sl{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 18px}.sl.a{grid-template-columns:repeat(3,1fr)}
+label{display:flex;justify-content:space-between;font-size:13px;color:var(--mu)}label b{color:var(--tx)}input[type=range]{width:100%;accent-color:var(--ac)}
+.tabs{display:flex;gap:6px}.tabs button{font:inherit;font-size:12px;border:1px solid var(--ln);background:var(--sf);color:var(--mu);padding:5px 12px;border-radius:99px;cursor:pointer}.tabs button[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:#fff}
+.sc{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--ln);white-space:nowrap}th{color:var(--mu);font-weight:500;font-size:12px}
+tbody tr{cursor:pointer}tbody tr:hover{background:var(--bg)}tr.sel{background:var(--acs)}
+.rk{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--bg);font-size:12px;font-weight:600}
+.bar{height:8px;background:var(--bg);border-radius:9px;overflow:hidden;min-width:70px}.bar i{display:block;height:100%}
+.row{display:grid;grid-template-columns:78px 1fr 38px;gap:8px;align-items:center;margin:8px 0;font-size:13px}.row span:last-child{text-align:right;font-weight:600}
+.rec{border:1px solid var(--ln);border-radius:10px;padding:10px;margin-bottom:8px}.rec b{display:block}.rec small{color:var(--mu)}.rec .s{float:right;font-weight:700;color:var(--g)}
+.sig{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--ln);font-size:13px}.sig:last-child{border:0}
+.pill{margin-left:auto;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:600;white-space:nowrap}.p-g{background:var(--gs);color:var(--g)}.p-o{background:var(--os);color:var(--o)}.p-r{background:var(--rs);color:var(--r)}
+.note{color:var(--mu);font-size:12px}.legend{display:flex;gap:10px;justify-content:center;font-size:12px;color:var(--mu);flex-wrap:wrap}.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+@media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}.grid>.card:first-child{grid-column:1/-1}.kpis{grid-template-columns:repeat(2,1fr)}.sl{grid-template-columns:1fr 1fr}.sl.a{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.app{grid-template-columns:1fr}aside{position:static;height:auto;display:flex;gap:6px;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--ln)}.brand,.side-note{display:none}aside a{margin:0}.grid{grid-template-columns:1fr}}
+button:focus-visible,input:focus-visible,tr:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 </style>
 </head>
 <body>
+<div class="app">
+<aside>
+<div class="brand"><div class="logo">S</div>Supplier DSS</div>
+<a href="#priorities" class="on">Priorities</a><a href="#scoreboard">Supplier scoreboard</a><a href="#sensitivity">Sensitivity</a>
+<div class="side-note">Model-driven DSS<br>AHP + TOPSIS<br>12 synthetic suppliers</div>
+</aside>
 <main>
-<h1>Supplier Selection DSS</h1>
-<p class="sub">Model-driven DSS using AHP weights and TOPSIS ranking, with explanation and sensitivity checks. Dataset: 12 synthetic suppliers (no real data).</p>
+<div class="top"><h1>Supplier Reliability Scoring</h1><span class="badge" id="badge"></span></div>
+<div class="kpis" id="kpis"></div>
 
-<section>
-<h2>1. Set the priorities</h2>
-<div class="tabs"><button id="mS" aria-pressed="true">Direct weights</button><button id="mA" aria-pressed="false">AHP pairwise comparison</button></div>
-<div id="pS" class="g"></div>
-<div id="pA" class="g" hidden></div>
-<p id="wOut" class="note"></p>
-</section>
+<div class="card pri" id="priorities">
+<div class="ch"><h2>Set the priorities</h2><div class="tabs"><button id="mS" aria-pressed="true">Direct weights</button><button id="mA" aria-pressed="false">AHP pairwise</button></div></div>
+<div id="pS" class="sl"></div><div id="pA" class="sl a" hidden></div>
+<p id="wOut" class="note" style="margin:10px 0 0"></p>
+</div>
 
-<section class="sc">
-<h2>2. Ranking and explanation</h2>
-<p class="note">Bars show how much each criterion contributes to the closeness score.
-<span class="k" style="background:var(--c1)"></span>Cost<span class="k" style="background:var(--c2)"></span>Quality<span class="k" style="background:var(--c3)"></span>Delivery<span class="k" style="background:var(--c4)"></span>Risk</p>
-<div id="rank"></div>
-<p id="why" class="note"></p>
-</section>
+<div class="grid" id="scoreboard">
+<div class="card"><div class="ch"><h2>Supplier scoreboard</h2><span class="tag">Ranked by TOPSIS</span></div><div class="sc" id="rank"></div></div>
+<div class="stack">
+<div class="card"><div class="ch"><h2>Score composition</h2><span class="tag" id="selTag"></span></div><div id="comp"></div><p class="note" id="why" style="margin:8px 0 0"></p></div>
+<div class="card"><div class="ch"><h2>Capability radar</h2><span class="tag">Top 3</span></div><div id="radar"></div></div>
+</div>
+<div class="stack">
+<div class="card"><div class="ch"><h2>Recommendation</h2><span class="tag" style="background:var(--gs);color:var(--g)">Best match</span></div><div id="rec"></div></div>
+<div class="card"><div class="ch"><h2>Trust signals</h2></div><div id="sig"></div></div>
+</div>
+</div>
 
-<section class="sc">
-<h2>3. Sensitivity analysis</h2>
-<p class="note">Each weight is randomly changed by up to ±<b id="pv">30</b>% over 1,000 runs. A trustworthy recommendation should keep its place.</p>
+<div class="card" id="sensitivity">
+<div class="ch"><h2>Sensitivity analysis</h2><span class="tag">1,000 runs</span></div>
+<p class="note" style="margin-top:0">Each weight is randomly changed by up to ±<b id="pv">30</b>%. A trustworthy recommendation keeps its place.</p>
 <input type="range" id="pert" min="5" max="60" value="30" aria-label="Perturbation size">
-<div id="sens"></div>
-<p id="verdict"></p>
-</section>
-
-<section>
-<h2>4. Trust notes</h2>
-<p class="note">Synthetic data and subjective weights limit trust. TOPSIS and weighted sum are compared above for method agreement; AHP consistency ratio below 0.10 is acceptable. The system supports the manager’s decision and does not replace it. Any sensitive supplier data should be anonymised before real use.</p>
-</section>
+<div class="sc" id="sens"></div>
+<p id="verdict" style="margin-bottom:0"></p>
+</div>
+<p class="note">Synthetic data and subjective weights limit trust. The system supports the manager’s decision and does not replace it.</p>
 </main>
+</div>
 <script>
-const C=["Cost","Quality","Delivery","Risk"],UN=["unit price (RM)","defect rate (%)","on-time (%)","risk score (1–10)"],BEN=[0,0,1,0];
+const C=["Cost","Quality","Delivery","Risk"],UN=["RM","defect %","on-time %","risk 1–10"],BEN=[0,0,1,0],col=["var(--c1)","var(--c2)","var(--c3)","var(--c4)"];
 const D=[["Alpha Metals",92,2.1,94,3],["Bravo Supply",85,3.4,88,4],["Cedar Parts",101,1.2,97,2],["Delta Works",78,5.1,81,6],["Eagle Trade",96,2.8,92,3],["Fusion Co",88,1.9,90,5],["Garnet Ltd",110,0.9,98,2],["Horizon Ind",82,4.2,85,5],["Ivory Source",95,2.4,86,7],["Jade Mfg",90,3.0,95,3],["Kite Logistics",99,1.6,93,4],["Lumen Parts",75,6.0,78,8]];
-const $=id=>document.getElementById(id),col=["var(--c1)","var(--c2)","var(--c3)","var(--c4)"];
-let mode="S",W=[.35,.30,.20,.15];
+const $=id=>document.getElementById(id);let mode="S",W=[.35,.30,.20,.15],sel=null,cr=null;
 const dw=[35,30,20,15],pairs=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]],pv=[1,2,2,1,2,1];
 $("pS").innerHTML=C.map((c,i)=>`<div><label for="w${i}">${c}<b id="wv${i}">${dw[i]}</b></label><input type="range" id="w${i}" min="0" max="100" value="${dw[i]}"></div>`).join("");
 $("pA").innerHTML=pairs.map((p,k)=>`<div><label for="a${k}">${C[p[0]]} vs ${C[p[1]]}<b id="av${k}"></b></label><input type="range" id="a${k}" min="-8" max="8" value="${pv[k]}"></div>`).join("");
-function topsis(w){const n=D.length,X=D.map(r=>r.slice(1)),nm=C.map((_,j)=>Math.sqrt(X.reduce((s,r)=>s+r[j]*r[j],0)));
+function topsis(w){const X=D.map(r=>r.slice(1)),nm=C.map((_,j)=>Math.sqrt(X.reduce((s,r)=>s+r[j]*r[j],0)));
 const V=X.map(r=>r.map((v,j)=>v/nm[j]*w[j])),best=C.map((_,j)=>BEN[j]?Math.max(...V.map(r=>r[j])):Math.min(...V.map(r=>r[j]))),worst=C.map((_,j)=>BEN[j]?Math.min(...V.map(r=>r[j])):Math.max(...V.map(r=>r[j])));
 return V.map(r=>{const dp=Math.hypot(...r.map((v,j)=>v-best[j])),dn=Math.hypot(...r.map((v,j)=>v-worst[j]));return{s:dn/(dp+dn),c:r.map((v,j)=>Math.abs(v-worst[j]))}})}
 function wsm(w){const X=D.map(r=>r.slice(1)),mx=C.map((_,j)=>Math.max(...X.map(r=>r[j]))),mn=C.map((_,j)=>Math.min(...X.map(r=>r[j])));
 return X.map(r=>r.reduce((s,v,j)=>s+w[j]*(BEN[j]?(v-mn[j])/(mx[j]-mn[j]):(mx[j]-v)/(mx[j]-mn[j])),0))}
 const ranks=a=>{const o=a.map((v,i)=>[v,i]).sort((x,y)=>y[0]-x[0]),r=[];o.forEach((e,k)=>r[e[1]]=k+1);return r};
 function ahp(){const A=[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]];
-pairs.forEach((p,k)=>{const v=+$("a"+k).value,x=v>=0?v+1:1/(1-v);A[p[0]][p[1]]=x;A[p[1]][p[0]]=1/x;$("av"+k).textContent=v>=0?(v==0?" equal":" "+C[p[0]]+" ×"+(v+1)):" "+C[p[1]]+" ×"+(1-v)});
+pairs.forEach((p,k)=>{const v=+$("a"+k).value,x=v>=0?v+1:1/(1-v);A[p[0]][p[1]]=x;A[p[1]][p[0]]=1/x;$("av"+k).textContent=v==0?"equal":v>0?C[p[0]]+" ×"+(v+1):C[p[1]]+" ×"+(1-v)});
 let w=A.map(r=>Math.pow(r.reduce((a,b)=>a*b,1),.25)),s=w.reduce((a,b)=>a+b);w=w.map(v=>v/s);
-const lm=A.reduce((t,r,i)=>t+r.reduce((a,v,j)=>a+v*w[j],0)/w[i],0)/4,cr=(lm-4)/3/.9;return{w,cr}}
-function run(){let cr=null;
-if(mode=="S"){const r=[0,1,2,3].map(i=>+$("w"+i).value);r.forEach((v,i)=>$("wv"+i).textContent=v);const s=r.reduce((a,b)=>a+b)||1;W=r.map(v=>v/s)}
-else{const a=ahp();W=a.w;cr=a.cr}
-$("wOut").innerHTML="Normalised weights: "+C.map((c,i)=>c+" "+(W[i]*100).toFixed(1)+"%").join(", ")+(cr!==null?`. Consistency ratio ${cr.toFixed(3)} — <span class="${cr<.1?"ok":"bad"}">${cr<.1?"acceptable":"inconsistent, revise comparisons"}</span>`:"");
-const T=topsis(W),rk=ranks(T.map(t=>t.s)),rw=ranks(wsm(W)),idx=D.map((_,i)=>i).sort((a,b)=>rk[a]-rk[b]);
-$("rank").innerHTML="<table><tr><th>#</th><th>Supplier</th><th>Score</th><th>Contribution</th>"+C.map((c,i)=>`<th>${c} (${UN[i]})</th>`).join("")+"<th>Weighted-sum rank</th></tr>"+idx.map(i=>{const t=T[i],cs=t.c.reduce((a,b)=>a+b)||1;
-return`<tr><td>${rk[i]}</td><td><b>${D[i][0]}</b></td><td>${t.s.toFixed(3)}</td><td><div class="bar" style="width:${t.s*100}%;min-width:60px">${t.c.map((v,j)=>`<i style="width:${v/cs*100}%;background:${col[j]}"></i>`).join("")}</div></td>${D[i].slice(1).map(v=>`<td>${v}</td>`).join("")}<td>${rw[i]}</td></tr>`}).join("")+"</table>";
-const top=idx[0],cm=T[top].c.map((v,j)=>[v,j]).sort((a,b)=>b[0]-a[0]);
-$("why").innerHTML=`<b>${D[top][0]}</b> ranks first mainly because of its ${C[cm[0][1]].toLowerCase()} and ${C[cm[1][1]].toLowerCase()} performance. Weighted-sum method ${rw[top]==1?"agrees":"ranks it #"+rw[top]}.`;
-sens(rk)}
-function sens(base){const p=$("pert").value/100;$("pv").textContent=Math.round(p*100);
-const N=1000,R=D.map(()=>[]),win=D.map(()=>0);
-for(let k=0;k<N;k++){let w=W.map(v=>v*(1+(Math.random()*2-1)*p)),s=w.reduce((a,b)=>a+b);w=w.map(v=>v/s);
-const r=ranks(topsis(w).map(t=>t.s));r.forEach((v,i)=>{R[i].push(v);if(v==1)win[i]++})}
-const idx=D.map((_,i)=>i).sort((a,b)=>base[a]-base[b]);
-$("sens").innerHTML="<table><tr><th>Supplier</th><th>Base rank</th><th>Rank #1 in</th><th>Best–worst rank</th><th>Average rank</th></tr>"+idx.slice(0,6).map(i=>`<tr><td>${D[i][0]}</td><td>${base[i]}</td><td>${(win[i]/N*100).toFixed(1)}%</td><td>${Math.min(...R[i])}–${Math.max(...R[i])}</td><td>${(R[i].reduce((a,b)=>a+b)/N).toFixed(2)}</td></tr>`).join("")+"</table>";
-const t=idx[0],pc=win[t]/N*100;
-$("verdict").innerHTML=`<b>${D[t][0]}</b> stays first in <b>${pc.toFixed(1)}%</b> of runs: <span class="${pc>=80?"ok":"bad"}">${pc>=80?"robust recommendation":pc>=50?"moderately stable, review the runner-up":"fragile, decision depends heavily on the weights"}</span>.`}
-document.querySelectorAll("input[type=range]").forEach(e=>e.addEventListener("input",e.id=="pert"?()=>run():run));
-function setM(m){mode=m;$("mS").setAttribute("aria-pressed",m=="S");$("mA").setAttribute("aria-pressed",m=="A");$("pS").hidden=m!="S";$("pA").hidden=m!="A";run()}
-$("mS").onclick=()=>setM("S");$("mA").onclick=()=>setM("A");run();
+const lm=A.reduce((t,r,i)=>t+r.reduce((a,v,j)=>a+v*w[j],0)/w[i],0)/4;return{w,cr:(lm-4)/3/.9}}
+function spearman(a,b){const n=a.length,d=a.reduce((s,v,i)=>s+(v-b[i])**2,0);return 1-6*d/(n*(n*n-1))}
+function radar(idx,T){const cx=110,cy=100,R=70,ang=[-90,0,90,180].map(a=>a*Math.PI/180),X=D.map(r=>r.slice(1)),mx=C.map((_,j)=>Math.max(...X.map(r=>r[j]))),mn=C.map((_,j)=>Math.min(...X.map(r=>r[j])));
+const pt=(j,f)=>[cx+Math.cos(ang[j])*R*f,cy+Math.sin(ang[j])*R*f],pc=["var(--c1)","var(--c2)","var(--c3)"];
+let s=`<svg viewBox="-12 0 244 200" width="100%" role="img" aria-label="Radar of top three suppliers">`;
+[.33,.66,1].forEach(f=>s+=`<polygon points="${[0,1,2,3].map(j=>pt(j,f).join(",")).join(" ")}" fill="none" stroke="var(--ln)"/>`);
+[0,1,2,3].forEach(j=>{const p=pt(j,1.18);s+=`<line x1="${cx}" y1="${cy}" x2="${pt(j,1)[0]}" y2="${pt(j,1)[1]}" stroke="var(--ln)"/><text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" font-size="10" fill="var(--mu)">${C[j]}</text>`});
+idx.slice(0,3).forEach((i,k)=>{const pts=[0,1,2,3].map(j=>{const f=BEN[j]?(X[i][j]-mn[j])/(mx[j]-mn[j]):(mx[j]-X[i][j])/(mx[j]-mn[j]);return pt(j,.08+.92*f).join(",")}).join(" ");s+=`<polygon points="${pts}" fill="${pc[k]}" fill-opacity=".15" stroke="${pc[k]}" stroke-width="2"/>`});
+s+=`</svg><div class="legend">${idx.slice(0,3).map((i,k)=>`<span><i style="background:${pc[k]}"></i>${D[i][0]}</span>`).join("")}</div>`;$("radar").innerHTML=s}
+function run(){
+if(mode=="S"){const r=[0,1,2,3].map(i=>+$("w"+i).value);r.forEach((v,i)=>$("wv"+i).textContent=v);const s=r.reduce((a,b)=>a+b)||1;W=r.map(v=>v/s);cr=null}else{const a=ahp();W=a.w;cr=a.cr}
+$("wOut").innerHTML="Normalised weights: "+C.map((c,i)=>c+" "+(W[i]*100).toFixed(1)+"%").join(" · ")+(cr!==null?`. Consistency ratio ${cr.toFixed(3)} — <b style="color:var(${cr<.1?"--g":"--r"})">${cr<.1?"acceptable":"inconsistent, revise comparisons"}</b>`:"");
+const T=topsis(W),rk=ranks(T.map(t=>t.s)),rw=ranks(wsm(W)),idx=D.map((_,i)=>i).sort((a,b)=>rk[a]-rk[b]),top=idx[0];
+if(sel===null||mode==="reset")sel=top;
+const rho=spearman(rk,rw),agree=rw[top]==1;
+$("rank").innerHTML="<table><thead><tr><th>#</th><th>Supplier</th><th>Score</th><th></th>"+C.map((c,i)=>`<th>${c}<br>(${UN[i]})</th>`).join("")+"<th>WSM #</th></tr></thead><tbody>"+idx.map(i=>`<tr data-i="${i}" tabindex="0" class="${i==sel?"sel":""}"><td><span class="rk">${rk[i]}</span></td><td><b>${D[i][0]}</b></td><td>${T[i].s.toFixed(3)}</td><td><div class="bar"><i style="width:${T[i].s*100}%;background:var(--ac)"></i></div></td>${D[i].slice(1).map(v=>`<td>${v}</td>`).join("")}<td>${rw[i]}</td></tr>`).join("")+"</tbody></table>";
+document.querySelectorAll("#rank tbody tr").forEach(tr=>{const f=()=>{sel=+tr.dataset.i;run()};tr.onclick=f;tr.onkeydown=e=>{if(e.key=="Enter")f()}});
+const cs=T[sel].c.reduce((a,b)=>a+b)||1;$("selTag").textContent=D[sel][0];
+$("comp").innerHTML=C.map((c,j)=>`<div class="row"><span>${c}</span><div class="bar"><i style="width:${T[sel].c[j]/cs*100}%;background:${col[j]}"></i></div><span>${Math.round(T[sel].c[j]/cs*100)}</span></div>`).join("");
+const cm=T[top].c.map((v,j)=>[v,j]).sort((a,b)=>b[0]-a[0]);
+$("why").innerHTML=`Click a row to inspect any supplier. <b>${D[top][0]}</b> leads mainly through ${C[cm[0][1]].toLowerCase()} and ${C[cm[1][1]].toLowerCase()}.`;
+radar(idx,T);
+// sensitivity
+const p=$("pert").value/100;$("pv").textContent=Math.round(p*100);const N=1000,R=D.map(()=>[]),win=D.map(()=>0);
+for(let k=0;k<N;k++){let w=W.map(v=>v*(1+(Math.random()*2-1)*p)),s=w.reduce((a,b)=>a+b);w=w.map(v=>v/s);ranks(topsis(w).map(t=>t.s)).forEach((v,i)=>{R[i].push(v);if(v==1)win[i]++})}
+const pc=win[top]/N*100,vd=pc>=80?["Robust","p-g"]:pc>=50?["Moderate","p-o"]:["Fragile","p-r"];
+$("sens").innerHTML="<table><thead><tr><th>Supplier</th><th>Base rank</th><th>Rank #1 in</th><th>Best–worst</th><th>Avg rank</th></tr></thead><tbody>"+idx.slice(0,6).map(i=>`<tr style="cursor:default"><td>${D[i][0]}</td><td>${rk[i]}</td><td>${(win[i]/N*100).toFixed(1)}%</td><td>${Math.min(...R[i])}–${Math.max(...R[i])}</td><td>${(R[i].reduce((a,b)=>a+b)/N).toFixed(2)}</td></tr>`).join("")+"</tbody></table>";
+$("verdict").innerHTML=`<b>${D[top][0]}</b> stays first in <b>${pc.toFixed(1)}%</b> of runs: <span class="pill ${vd[1]}" style="margin:0">${vd[0]}</span>`;
+// header + kpis
+$("badge").textContent=mode=="S"?"Direct weights":"AHP weights · CR "+cr.toFixed(3);
+const k=[["Top supplier",D[top][0],"closeness "+T[top].s.toFixed(3)],["Score gap","+"+((T[top].s-T[idx[1]].s)*100).toFixed(1)+" pts","vs "+D[idx[1]][0]],["Top-1 stability",pc.toFixed(0)+"%","±"+Math.round(p*100)+"% weight noise"],["Method agreement",rho.toFixed(2),"Spearman vs weighted sum"],["Weak suppliers",D.length-idx.filter(i=>T[i].s>.4).length+" flagged","score below 0.40"]];
+$("kpis").innerHTML=k.map(x=>`<div class="card kpi"><small>${x[0]}</small><b>${x[1]}</b><span>${x[2]}</span></div>`).join("");
+$("rec").innerHTML=[0,1].map(n=>{const i=idx[n];return`<div class="rec"><span class="s">${T[i].s.toFixed(3)}</span><b>${n?"Backup: ":""}${D[i][0]}</b><small>${n?"Keep as fallback; review if weights change":"Highest closeness to the ideal supplier"}</small></div>`}).join("")+`<p class="note" style="margin:0">Decision support only: confirm with relationships and strategic fit.</p>`;
+const ch=idx.slice(1).filter(i=>win[i]>0).slice(0,2);
+$("sig").innerHTML=`<div class="sig"><span>Top-1 stability<br><small class="note">${pc.toFixed(1)}% of runs</small></span><span class="pill ${vd[1]}">${vd[0]}</span></div>`+
+`<div class="sig"><span>Method agreement<br><small class="note">Weighted sum ${agree?"agrees":"ranks it #"+rw[top]}</small></span><span class="pill ${agree?"p-g":"p-o"}">${agree?"Clear":"Watch"}</span></div>`+
+`<div class="sig"><span>Weights<br><small class="note">${cr===null?"Direct, subjective":"CR "+cr.toFixed(3)}</small></span><span class="pill ${cr===null?"p-o":cr<.1?"p-g":"p-r"}">${cr===null?"Watch":cr<.1?"Clear":"High"}</span></div>`+
+ch.map(i=>`<div class="sig"><span>Challenger: ${D[i][0]}<br><small class="note">#1 in ${(win[i]/N*100).toFixed(1)}% of runs</small></span><span class="pill p-o">Watch</span></div>`).join("")}
+document.querySelectorAll("input[type=range]").forEach(e=>e.addEventListener("input",run));
+function setM(m){mode=m;$("mS").setAttribute("aria-pressed",m=="S");$("mA").setAttribute("aria-pressed",m=="A");$("pS").hidden=m!="S";$("pA").hidden=m!="A";sel=null;run()}
+$("mS").onclick=()=>setM("S");$("mA").onclick=()=>setM("A");
+document.querySelectorAll("aside a").forEach(a=>a.addEventListener("click",()=>{document.querySelectorAll("aside a").forEach(x=>x.classList.remove("on"));a.classList.add("on")}));
+run();
 </script>
 </body>
 </html>
